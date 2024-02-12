@@ -21,17 +21,16 @@ export function HomeScreen() {
   return (
     <YStack f={1} jc="center" ai="center" p="$4" space>
       <YStack space="$4" bc="$background">
-        <H1 ta="center">Welcome to Tamagui.</H1>
+        <H1 ta="center">Welcome to my home page.</H1>
         <Paragraph ta="center">
-          Here's a basic starter to show navigating from one screen to another. This screen uses the
-          same code on Next.js and React Native.
+          Here are some things I'm passionate about
         </Paragraph>
 
         <Separator />
         <Paragraph ta="center">
           Made by{' '}
-          <Anchor color="$color12" href="https://twitter.com/natebirdman" target="_blank">
-            @natebirdman
+          <Anchor color="$color12" href="https://www.instagram.com/tyrone.yanaga/" target="_blank">
+            @tyrone.yanaga
           </Anchor>
           ,{' '}
           <Anchor
@@ -40,13 +39,13 @@ export function HomeScreen() {
             target="_blank"
             rel="noreferrer"
           >
-            give it a ⭐️
+            give it a 👀
           </Anchor>
         </Paragraph>
       </YStack>
 
       <XStack>
-        <Button {...linkProps}>Link to user</Button>
+        <Button {...linkProps}>Link to window</Button>
       </XStack>
 
       <SheetDemo />
