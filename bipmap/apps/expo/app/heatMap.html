@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bird Spotting Heat Map</title>
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script>
+    // Your Google Maps API key
+    const apiKey = 'AIzaSyC54EWt2IwE2PSeidU165csUn0LUX2p5AE';
+
+    // Initialize the map
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 37.8049, lng: -122.2711 }, // Oakland coordinates
+        zoom: 12,
+      });
+
+      // Fetch bird spotting data from your API
+      fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
+        .then(response => response.json())
+        .then(data => {
+          // Process the fetched data and add markers or heat map layer
+          data.forEach(entry => {
+            var coordinates = entry.Location.match(/-?\d+\.\d+/g)
+            const marker = new google.maps.Marker({
+              position: { lat: parseFloat(coordinates[0]), lng: parseFloat(coordinates[1]) },
+              map: map,
+              title: entry.DESCRIPTION,
+            });
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  </script>
+
+  <!-- Include the Google Maps JavaScript API with your key -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC54EWt2IwE2PSeidU165csUn0LUX2p5AE&callback=initMap">
+  </script>
+</body>
+</html>

@@ -15,7 +15,7 @@ import { useLink } from 'solito/link'
 
 export function HomeScreen() {
   const linkProps = useLink({
-    href: '/user/nate',
+    href: '/heatMap.html',
   })
 
   return (
