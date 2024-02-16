@@ -25,21 +25,22 @@
         zoom: 12,
       });
 
-      // Fetch crime data from your API
+      setMarkers(map)
+    }
+
+    function setMarkers(map) {
+        // Fetch crime data from your API
       fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
         .then(response => response.json())
         .then(data => {
           // Process the fetched data and add markers or heat map layer
           data.forEach(entry => {
-            var coordinates = entry.location_1.coordinates
-            console.log(coordinates[1])
-             marker = new google.maps.Marker({
-              position: { lat: 37.8049, lng: -122.2711 },
+            const coordinates = entry.location_1.coordinates
+             const marker = new google.maps.Marker({
+              position: { lat: coordinates[1], lng: coordinates[0] },
               map: map,
               title: entry.description,
             });
-            marker.position = { lat: coordinates[0], lng: coordinates[1]}
-            console.log(marker.position)
           });
         })
         .catch(error => {
