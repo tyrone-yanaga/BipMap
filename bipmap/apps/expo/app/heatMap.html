@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bird Spotting Heat Map</title>
+  <title>Oakland Crime Heat Map</title>
   <style>
     #map {
       height: 400px;
@@ -25,18 +25,20 @@
         zoom: 12,
       });
 
-      // Fetch bird spotting data from your API
+      // Fetch crime data from your API
       fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
         .then(response => response.json())
         .then(data => {
           // Process the fetched data and add markers or heat map layer
           data.forEach(entry => {
-            var coordinates = entry.Location.match(/-?\d+\.\d+/g)
+            var coordinates = entry.location_1.coordinates
+            console.log(coordinates[1])
             const marker = new google.maps.Marker({
-              position: { lat: parseFloat(coordinates[0]), lng: parseFloat(coordinates[1]) },
+              position: { lat: coordinates[0], lng: coordinates[1]},
               map: map,
-              title: entry.DESCRIPTION,
+              title: entry.description,
             });
+            console.log(marker)
           });
         })
         .catch(error => {
