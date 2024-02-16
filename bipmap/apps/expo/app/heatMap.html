@@ -33,12 +33,13 @@
           data.forEach(entry => {
             var coordinates = entry.location_1.coordinates
             console.log(coordinates[1])
-            const marker = new google.maps.Marker({
-              position: { lat: coordinates[0], lng: coordinates[1]},
+             marker = new google.maps.Marker({
+              position: { lat: 37.8049, lng: -122.2711 },
               map: map,
               title: entry.description,
             });
-            console.log(marker)
+            marker.position = { lat: coordinates[0], lng: coordinates[1]}
+            console.log(marker.position)
           });
         })
         .catch(error => {
