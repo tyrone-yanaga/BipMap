@@ -26,34 +26,50 @@
                 center: { lat: 37.8049, lng: -122.2711 }, // Oakland coordinates
                 zoom: 12,
             });
-            setHeatMap(map)
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: getPoints(),
+                map: map,
+            });
+            console.log('heatmap data post fetch call: ', heatmap.data)
+
+            // document
+            //     .getElementById("toggle-heatmap")
+            //     .addEventListener("click", toggleHeatmap);
+            // document
+            //     .getElementById("change-gradient")
+            //     .addEventListener("click", changeGradient);
+            // document
+            //     .getElementById("change-opacity")
+            //     .addEventListener("click", changeOpacity);
+            // document
+            //     .getElementById("change-radius")
+            //     .addEventListener("click", changeRadius);
         }
 
-        function setHeatMap(map) {
+        function getPoints() {
             var heatMapData = [
                 new google.maps.LatLng(37.782, -122.447),
                 new google.maps.LatLng(37.782, -122.445),
                 new google.maps.LatLng(37.782, -122.443),
                 new google.maps.LatLng(37.782, -122.441)
             ];
+            var num = 0;
             // Fetch crime data from your API
             fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
                 .then(response => response.json())
                 .then(data => {
                     // Process the fetched data and add heat map layer
                     data.forEach(entry => {
+                        num++;
                         const coordinates = entry.location_1.coordinates
-                        const dataPoint = new google.maps.LatLng(coordinates[1], coordinates[0]);
-                        heatMapData.push(dataPoint)
+                        heatMapData.push(new google.maps.LatLng(coordinates[1], coordinates[0]));
                     });
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
-            var heatmap = new google.maps.visualization.HeatmapLayer({
-                data: heatMapData
-            });
             console.log('heatMapData: ', heatMapData)
+            return heatMapData;
         }
     </script>
 
