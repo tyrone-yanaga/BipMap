@@ -48,21 +48,19 @@
 
         function getPoints() {
             var heatMapData = [
-                new google.maps.LatLng(37.782, -122.447),
-                new google.maps.LatLng(37.782, -122.445),
-                new google.maps.LatLng(37.782, -122.443),
-                new google.maps.LatLng(37.782, -122.441)
+                // new google.maps.LatLng(37.782, -122.447),
+                // new google.maps.LatLng(37.782, -122.445),
+                // new google.maps.LatLng(37.782, -122.443),
+                // new google.maps.LatLng(37.782, -122.441)
             ];
-            var num = 0;
             // Fetch crime data from your API
             fetch('https://data.oaklandca.gov/resource/ym6k-rx7a.json')
                 .then(response => response.json())
                 .then(data => {
                     // Process the fetched data and add heat map layer
                     data.forEach(entry => {
-                        num++;
                         const coordinates = entry.location_1.coordinates
-                        heatMapData.push(new google.maps.LatLng(coordinates[1], coordinates[0]));
+                        heatMapData.unshift(new google.maps.LatLng(coordinates[1], coordinates[0]));
                     });
                 })
                 .catch(error => {
