@@ -35,7 +35,7 @@ export function HomeScreen() {
           ,{' '}
           <Anchor
             color="$color12"
-            href="https://github.com/tamagui/tamagui"
+            href="bipmap/apps/expo/app/heatMap.html"
             target="_blank"
             rel="noreferrer"
           >
